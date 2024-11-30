@@ -12,23 +12,38 @@
             }else{
                 die("Error ".mysqli_error($connection));
             }
-
         }catch(Exception $e){
             die($e->getMessage());
         }
     }
 	
-	if ($_SERVER['REQUEST_METHOD'] == "POST") {
+	//if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if(isset($_POST['send'])){
 		$fname = $_POST['fname'];
         $lname = $_POST['lname'];
         $gender = $_POST['gender'];
 		$age = $_POST['age'];
 		$course = $_POST['course'];
-		AddData($connection,$fname,$lname,$gender,$age,$course);
+        if($fname == "" || $lname == "" || $gender == "" || $age =="" || $course == ""){
+            header("Location: index.php");
+        }else{
+            AddData($connection,$fname,$lname,$gender,$age,$course);
+        }
 	}
 
     function showData($connection){
-        
+        try{
+            $sql = "SELECT * FROM students";
+            $result = mysqli_query($connection,$sql);
+
+            echo "<tr><th>First Name</th><th>Last Name</th><th>Age</th><th>Gender</th><th>Course</th></tr>";
+ 
+            while($row = mysqli_fetch_assoc($result)){
+                echo "<tr>" . "<td>" . $row['fname'] . "</td>" . "<td>" . $row['lname'] . "</td>" . "<td>" . $row['course'] . "</td>" . "</td>" . "<td>" . $row['gender'] ."</td>" . "</tr>";
+            }
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -47,7 +62,10 @@
         <input type="radio" name="gender" value="Female">Female<br><br>
         Age: <input type="number" name="age"><br><br>
         Course: <input type="text" name="course"><br><br>
-        <button>Submit Your Data</button>
+        <button type="submit" name="send">Submit Your Data</button>
     </form>
+    <table>
+        <?php showData($connection); ?>
+    </table>
 </body>
 </html>
