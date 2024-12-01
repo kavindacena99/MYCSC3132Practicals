@@ -7,13 +7,13 @@
     define('DBNAME', 'web');
     */
 
-    $servername = getenv('');
-    $username = getenv('');
-    $password = getenv('');
-    $database = getenv('');
+    $servername = getenv('DB_HOST');
+    $username = getenv('DB_USER');
+    $password = getenv('DB_PASS');
+    $database = getenv('DB_NAME');
 
     try {
-        $connect = mysqli_connect(SERVERNAME,USERNAME,PASSWORD,DBNAME);
+        $connect = mysqli_connect($servername,$username,$password,$database);
         if (!$connect) {
             die("connection failed".mysqli_connect_error());
         } 
