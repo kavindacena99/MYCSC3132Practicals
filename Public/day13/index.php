@@ -38,7 +38,7 @@
     function PrintTableCols($tableName,$connect,$colnames){
 
         try {
-            $sql = "SELECT ";
+            $sql = "SELECT * FROM $tableName";
             for ($i=0; $i < sizeof($colnames)-1; $i++) { 
                 $sql .=$colnames[$i].",";
             }
@@ -70,7 +70,7 @@
             die($e->getMessage());
         }
     }
-    PrintTableCols("books",$connect,["author","title","isbn"]);
+    PrintTable("books",$connect,["author","title","isbn"]);
 
     echo "<br><br><br>";
     

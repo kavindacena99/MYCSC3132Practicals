@@ -36,10 +36,10 @@
             $sql = "SELECT * FROM students";
             $result = mysqli_query($connection,$sql);
 
-            echo "<tr><th>First Name</th><th>Last Name</th><th>Age</th><th>Gender</th><th>Course</th></tr>";
+            echo "<tr><th>First Name</th><th>Last Name</th><th>Age</th><th>Course</th><th>Gender</th></tr>";
  
             while($row = mysqli_fetch_assoc($result)){
-                echo "<tr>" . "<td>" . $row['fname'] . "</td>" . "<td>" . $row['lname'] . "</td>" . "<td>" . $row['course'] . "</td>" . "</td>" . "<td>" . $row['gender'] ."</td>" . "</tr>";
+                echo "<tr>" . "<td>" . $row['fname'] . "</td>" . "<td>" . $row['lname'] . "</td>" . "<td>" . $row['age'] . "</td>" . "<td>" . $row['course'] . "</td>" . "</td>" . "<td>" . $row['gender'] ."</td>" . "</tr>";
             }
         }catch(Exception $e){
             die($e->getMessage());
