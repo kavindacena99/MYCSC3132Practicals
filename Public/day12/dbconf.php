@@ -1,16 +1,19 @@
 <?php
-    /*
+    $servername = '127.0.0.1';
+    $username = 'root';
+    $password = 'mariadb';
+    $database = 'web';
 
-    define('SERVERNAME', '127.0.0.1');
-    define('USERNAME', 'root');
-    define('PASSWORD', 'mariadb');
-    define('DBNAME', 'web');
-    */
+    //with envs not working
+
+    /*
 
     $servername = getenv('DB_HOST');
     $username = getenv('DB_USER');
     $password = getenv('DB_PASS');
     $database = getenv('DB_NAME');
+
+    */
 
     try {
         $connect = mysqli_connect($servername,$username,$password,$database);
